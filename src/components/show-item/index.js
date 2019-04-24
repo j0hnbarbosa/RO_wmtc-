@@ -205,7 +205,7 @@ const ShowItem = (props) => {
           <CardItem>
             <Body>
               <Text>
-             Last Price:
+             Lastest Price:
                 {' '}
                 {data.global.latest.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
               </Text>
