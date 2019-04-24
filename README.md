@@ -1,11 +1,11 @@
 # RO_wmtc-
 Ragnarok Online - what miss to collect
 
-To execute it use:
+# To execute it use:
 
 git clone
 
-# Open the terminal inside the directory of RO_wmtc an run
+# Open the terminal inside the directory of RO_wmtc and run
 
 npm install
 
