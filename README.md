@@ -19,6 +19,6 @@ adb devices
 
 # take the id of the device that you are using and execute:
 
-adb -s id_of_your_own_device tcp:8081 tcp:8081 && react-native run-android
+adb -s id_of_your_own_device reverse tcp:8081 tcp:8081 && react-native run-android
 
 
