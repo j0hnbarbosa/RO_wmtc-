@@ -3,7 +3,7 @@ Ragnarok Online - what miss to collect
 
 # To execute it use:
 
-git clone
+git clone name_of_repository
 
 # Open the terminal inside the directory of RO_wmtc and run
 
