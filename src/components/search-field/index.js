@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Container,
   Header,
   Item,
   Input,
@@ -8,17 +7,29 @@ import {
   Button,
   Text,
   View,
+  Spinner,
 } from 'native-base';
 
-const SearchField = () => {
+const SearchField = (props) => {
+  const {onChangeName, onSearch, onClearSearch, searchItemName, loadingSearch} = props;
   return (
     <View>
       <Header searchBar rounded>
         <Item>
-          <Icon name="ios-search" />
-          <Input placeholder="Search" />
-          <Button transparent>
-            <Text>Search</Text>
+        <Button onPress={onClearSearch} transparent>
+          <Icon  name="ios-close" />
+          </Button>
+
+          <Input
+            editable={!loadingSearch}
+            placeholder="Search"
+            onChangeText={onChangeName}
+            value={searchItemName}
+            importantForAutofill={'yes'}
+            />
+          <Button onPress={onSearch} transparent>
+          {!loadingSearch && <Text>Search</Text>}
+              {loadingSearch && <Spinner/>}
           </Button>
 
         </Item>

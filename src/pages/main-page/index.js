@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SearchField from '../../components/search-field';
+import ShowItem from '../../components/show-item';
 
 import {
   Accordion,
@@ -18,10 +19,17 @@ class MainPage extends Component {
       dataArray: [],
       allData: [],
       loading: false,
+      loadingSearch: false,
       itemsFrom: {begin: 0,  end: 200},
-
+      searchItemName: '',
+      searchData: [],
     };
   }
+
+onChangeName = (name) => {
+  this.setState({searchItemName: name});
+  console.log(name);
+}
 
    getTypeData = (pos) => {
     typeData = {
@@ -61,6 +69,27 @@ class MainPage extends Component {
   fecthData = async () => {
     const data =  await fetch('https://www.romexchange.com/api/items.json');
     return await data.json();
+
+  }
+
+  searchFecthData = async () => {
+    const {searchItemName } = await this.state;
+    const data =  await fetch(`https://www.romexchange.com/api?item=${searchItemName}&exact=false`);
+    return await data.json();
+  }
+
+  onClearSearch = () => {
+    this.setState({ searchData: [], dataArray: [] });
+  }
+
+  onSearch = async () => {
+    const {searchItemName } = await this.state;
+    if(!searchItemName)
+      return;
+    this .setState({loadingSearch: true });
+    const data = await this.searchFecthData(searchItemName);
+    this.setState({ searchData: data, searchItemName: ''});
+    this .setState({loadingSearch: false });
   }
 
    onShowItems = async () => {
@@ -93,10 +122,24 @@ class MainPage extends Component {
   }
 
   render() {
-    const { dataArray, loading, itemsFrom } = this.state;
+    const {
+      dataArray,
+      loading,
+      itemsFrom,
+      searchData,
+      searchItemName,
+      loadingSearch
+    } = this.state;
     return (
       <Container>
-      <SearchField />
+      <SearchField
+        onSearch={this.onSearch}
+        onChangeName={this.onChangeName}
+        searchItemName={searchItemName}
+        loadingSearch={loadingSearch}
+        onClearSearch={this.onClearSearch}
+        />
+      <ShowItem searchData={searchData} />
         <View
           style={{
             display: "flex",
@@ -113,7 +156,7 @@ class MainPage extends Component {
 
         </View>
 
-        <Content padder>
+        {dataArray.length > 0 && <Content padder>
             <Accordion
               dataArray={dataArray}
               icon="add"
@@ -122,6 +165,7 @@ class MainPage extends Component {
               expandedIconStyle={{ color: "red" }}
             />
           </Content>
+        }
       </Container>
     );
   }
