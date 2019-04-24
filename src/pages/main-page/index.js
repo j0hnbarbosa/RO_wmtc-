@@ -28,7 +28,7 @@ class MainPage extends Component {
 
     onChangeName = (name) => {
       this.setState({searchItemName: name});
-      console.log(name);
+      // console.log(name);
     }
 
    getTypeData = (pos) => {
@@ -81,6 +81,12 @@ class MainPage extends Component {
   onClearSearch = () => {
     this.setState({ searchData: [], dataArray: [] });
   }
+
+  onPresseKeyBoardConfirm = (e) => {
+    if(e.nativeEvent.key === undefined) {
+        this.onSearch();
+    }
+  };
 
   onSearch = async () => {
     const {searchItemName } = await this.state;
@@ -138,6 +144,7 @@ class MainPage extends Component {
         searchItemName={searchItemName}
         loadingSearch={loadingSearch}
         onClearSearch={this.onClearSearch}
+        onPresseKeyBoardConfirm={this.onPresseKeyBoardConfirm}
         />
       <ShowItem searchData={searchData} />
         <View

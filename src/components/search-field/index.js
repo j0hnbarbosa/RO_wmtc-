@@ -13,7 +13,7 @@ import {
 
 const SearchField = (props) => {
   const {
-    onChangeName, onSearch, onClearSearch, searchItemName, loadingSearch,
+    onChangeName, onSearch, onClearSearch, searchItemName, loadingSearch, onPresseKeyBoardConfirm,
   } = props;
   return (
     <View>
@@ -32,7 +32,8 @@ const SearchField = (props) => {
             placeholder="Search"
             onChangeText={onChangeName}
             value={searchItemName}
-            importantForAutofill="yes"
+            onSubmitEditing={onPresseKeyBoardConfirm}
+            // importantForAutofill="yes"
           />
           <Button
             disabled={loadingSearch}
@@ -52,6 +53,7 @@ const SearchField = (props) => {
 SearchField.propTypes = {
   onChangeName: PropTypes.func.isRequired,
   onSearch: PropTypes.func.isRequired,
+  onPresseKeyBoardConfirm: PropTypes.func.isRequired,
   onClearSearch: PropTypes.func.isRequired,
   searchItemName: PropTypes.string.isRequired,
   loadingSearch: PropTypes.bool.isRequired,
