@@ -5,7 +5,7 @@ To execute it use:
 
 git clone
 
-# inside the directory of RO_wmtc
+# Open the terminal inside the directory of RO_wmtc an run
 
 npm install
 
