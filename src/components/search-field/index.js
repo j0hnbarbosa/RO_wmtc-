@@ -1,19 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
-  Header,
-  Item,
-  Input,
-  Icon,
   Button,
+  Header,
+  Icon,
+  Input,
+  Item,
+  Spinner,
   Text,
   View,
-  Spinner,
 } from 'native-base';
-
-
-const handleKeyDown = (e) => {
-  console.log('Aqui:', e);
-};
 
 const SearchField = (props) => {
   const {
@@ -28,7 +24,7 @@ const SearchField = (props) => {
             onPress={onClearSearch}
             transparent
           >
-            <Icon name="ios-close" />
+            <Icon name="ios-trash" />
           </Button>
 
           <Input
@@ -36,7 +32,6 @@ const SearchField = (props) => {
             placeholder="Search"
             onChangeText={onChangeName}
             value={searchItemName}
-            onKeyPress={handleKeyDown}
             importantForAutofill="yes"
           />
           <Button
@@ -54,5 +49,12 @@ const SearchField = (props) => {
   );
 };
 
+SearchField.propTypes = {
+  onChangeName: PropTypes.func.isRequired,
+  onSearch: PropTypes.func.isRequired,
+  onClearSearch: PropTypes.func.isRequired,
+  searchItemName: PropTypes.string.isRequired,
+  loadingSearch: PropTypes.bool.isRequired,
+};
 
 export default SearchField;

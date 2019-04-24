@@ -7,9 +7,9 @@ import {
   Button,
   Container,
   Content,
+  Spinner,
   Text,
   View,
-  Spinner
 } from "native-base";
 
 class MainPage extends Component {
@@ -26,10 +26,10 @@ class MainPage extends Component {
     };
   }
 
-onChangeName = (name) => {
-  this.setState({searchItemName: name});
-  console.log(name);
-}
+    onChangeName = (name) => {
+      this.setState({searchItemName: name});
+      console.log(name);
+    }
 
    getTypeData = (pos) => {
     typeData = {
