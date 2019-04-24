@@ -149,6 +149,7 @@ onChangeName = (name) => {
             alignItems: "center"}}
         >
           <Button
+            disabled={loading}
             onPress={this.onShowItems} center rounded info>
               <Text>Items from {!loading && `${itemsFrom.begin} - ${itemsFrom.end}`}</Text>
               {loading && <Spinner/>}
