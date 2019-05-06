@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import SearchField from '../../components/search-field';
 import ShowItem from '../../components/show-item';
-
+import { SafeAreaView } from 'react-native';
+import { RoutesDrawer }  from '../../routes';
 import {
   Accordion,
   Button,
@@ -11,8 +12,30 @@ import {
   Text,
   View,
 } from "native-base";
+import Icon from 'react-native-vector-icons/Ionicons';
+import {Button as ButtonNative} from 'react-native';
 
 class MainPage extends Component {
+  // static navigationOptionsHeader = ({navigation}) => {
+  //   console.log(navigation);
+  //   // const as = {...RoutesDrawer};
+  //   // console.table(as);
+  //  return {
+     
+  //   headerLeft: (
+      
+  //       <Icon.Button  
+  //       name="ios-menu" 
+  //       size={30} 
+  //       color="#800" 
+  //       type="clear"
+  //       backgroundColor= "transparent"
+  //       onPress={() => alert("Im here!")} 
+  //       />
+      
+  //   ),
+  // }};
+
   constructor(props) {
     super(props);
     this.state = {
@@ -26,10 +49,13 @@ class MainPage extends Component {
     };
   }
 
-    onChangeName = (name) => {
-      this.setState({searchItemName: name});
-      // console.log(name);
-    }
+
+  componentDidMount(){ }
+
+  onChangeName = (name) => {
+    this.setState({searchItemName: name});
+    // console.log(name);
+  }
 
    getTypeData = (pos) => {
     typeData = {
@@ -137,6 +163,7 @@ class MainPage extends Component {
       loadingSearch
     } = this.state;
     return (
+
       <Container>
       <SearchField
         onSearch={this.onSearch}
@@ -146,7 +173,9 @@ class MainPage extends Component {
         onClearSearch={this.onClearSearch}
         onPresseKeyBoardConfirm={this.onPresseKeyBoardConfirm}
         />
+
       <ShowItem searchData={searchData} />
+
         <View
           style={{
             display: "flex",
@@ -161,7 +190,9 @@ class MainPage extends Component {
               <Text>Items from {!loading && `${itemsFrom.begin} - ${itemsFrom.end}`}</Text>
               {loading && <Spinner/>}
           </Button>
-
+            <Button onPress={() => this.props.navigation.toggleDrawer()}>
+             <Text>Abra</Text>
+          </Button>
         </View>
 
         {dataArray.length > 0 && <Content padder>
@@ -174,7 +205,8 @@ class MainPage extends Component {
             />
           </Content>
         }
-      </Container>
+        </Container>
+ 
     );
   }
 }

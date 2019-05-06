@@ -1,25 +1,29 @@
-import {
-  createDrawerNavigator,
-  createAppContainer,
-} from 'react-navigation';
-import Login from './home';
-import SignUp from './home2';
-import MainPage from '../main-page';
+import React from 'react';
+import { View, Text, Button, SafeAreaView, StyleSheet } from 'react-native';
 
-const RootStack = createDrawerNavigator({
-  Home111: {
-    screen: SignUp,
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  Home222: {
-    screen: Login,
-  },
-  MainPage: { screen: MainPage },
-},
-{
+});
 
-  initialRouteName: 'Home111',
-} );
+const Category = props => {
+      console.log(props);
 
-const App = createAppContainer(RootStack);
+  return(
+  <SafeAreaView style={styles.container}>
+    <View style={{ display: 'flex', justifyContent: 'center', alignContent: 'center' }}>
+      <Text>
+          Category Page
+      </Text>
+      <Button
+        title="Abra"
+        onPress={ () => props.navigation.toggleDrawer() } 
+      />
+    </View>
+  </SafeAreaView>
+);}
 
-export default App;
+export default Category;
