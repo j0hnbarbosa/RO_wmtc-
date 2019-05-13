@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import SearchField from '../../components/search-field';
 import ShowItem from '../../components/show-item';
-import { SafeAreaView } from 'react-native';
-import { RoutesDrawer }  from '../../routes';
 import {
   Accordion,
   Button,
@@ -12,30 +10,17 @@ import {
   Text,
   View,
 } from "native-base";
-import Icon from 'react-native-vector-icons/Ionicons';
-import {Button as ButtonNative} from 'react-native';
-
+import HearderBar from '../../components/header-bar';
 class MainPage extends Component {
-  // static navigationOptionsHeader = ({navigation}) => {
-  //   console.log(navigation);
-  //   // const as = {...RoutesDrawer};
-  //   // console.table(as);
-  //  return {
-     
-  //   headerLeft: (
-      
-  //       <Icon.Button  
-  //       name="ios-menu" 
-  //       size={30} 
-  //       color="#800" 
-  //       type="clear"
-  //       backgroundColor= "transparent"
-  //       onPress={() => alert("Im here!")} 
-  //       />
-      
-  //   ),
-  // }};
-
+  static navigationOptions = {
+    
+    headerRight: (
+      <Button
+        onPress={() => alert('This is a button!')}
+        title="Info"
+        color="#841584"
+      />
+    ),}
   constructor(props) {
     super(props);
     this.state = {
@@ -47,6 +32,7 @@ class MainPage extends Component {
       searchItemName: '',
       searchData: [],
     };
+
   }
 
 
@@ -162,9 +148,16 @@ class MainPage extends Component {
       searchItemName,
       loadingSearch
     } = this.state;
+
+    console.log('main', this.props);
+
+
     return (
 
       <Container>
+      
+      <HearderBar color='#fff' navigation={this.props.navigation} />
+
       <SearchField
         onSearch={this.onSearch}
         onChangeName={this.onChangeName}

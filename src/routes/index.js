@@ -8,52 +8,36 @@ import {
   createAppContainer,
 } from 'react-navigation';
 import CategoryPage from '../pages/category';
+import NadaPage from '../pages/category/nada';
 import MainPage from '../pages/main-page';
 
-const defaultConfig = {
-  defaultNavigationOptions: {
-    headerTintColor: '#FFF',
-    headerStyle: {
-      backgroundColor: '#835530',
+const StackRouter = createStackNavigator({
+  MainPage: {
+    screen: MainPage,
+    navigationOptions: {
+      headerRight: (
+        <Button
+          onPress={() => {console.log('')}}
+          title="Info"
+          color="#841584"
+        />
+      ),
     },
   },
-};
-
-const navigationOptionsHeader = ({ navigation }) => {
-  // console.log(navigation);
-  // const as = {...RoutesDrawer};
-  // console.table(as);
-  return {
-    headerLeft: (
-      <Icon.Button
-        name="ios-menu"
-        size={30}
-        color="#800"
-        type="clear"
-        backgroundColor="transparent"
-        onPress={() => alert('Im here!')}
-      />
-    ),
-  };
-};
-
-const RouteDrawer = createDrawerNavigator({
-  'Main Page': MainPage,
-  Category: CategoryPage,
-},
-{
-  defaultNavigationOptions: navigationOptionsHeader,
+  Category: {
+    screen: NadaPage,
+  },
 });
 
+const DrawerRouter = createDrawerNavigator({
+  'Main Page': {
+    screen: StackRouter,
+  },
+  Category: {
+    screen: CategoryPage,
+  },
+});
 
-const RoutesDrawer = createAppContainer(RouteDrawer);
+const MainRouter = createAppContainer(DrawerRouter);
 
-const RouteStack = createStackNavigator({
-  'Main Page': MainPage,
-  Category: CategoryPage,
-},
-defaultConfig);
-
-const RoutesStack = createAppContainer(RouteStack);
-
-export { RoutesStack, RoutesDrawer };
+export default MainRouter;

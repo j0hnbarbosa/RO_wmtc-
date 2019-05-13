@@ -10,13 +10,13 @@ const styles = StyleSheet.create({
 });
 
 const Category = props => {
-      console.log('Category',props);
+  console.log(props);
 
   return(
   <SafeAreaView style={styles.container}>
     <View style={{ display: 'flex', justifyContent: 'center', alignContent: 'center' }}>
       <Text>
-          Category Page
+          nada Page
       </Text>
       <Button
         title="Abra"
