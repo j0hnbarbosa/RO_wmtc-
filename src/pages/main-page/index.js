@@ -9,18 +9,29 @@ import {
   Spinner,
   Text,
   View,
+  Icon
 } from "native-base";
+
 import HearderBar from '../../components/header-bar';
+
 class MainPage extends Component {
-  static navigationOptions = {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: 'Main Page',
+      headerLeft: (
+        <Button
+          transparent
+          onPress={() => navigation.toggleDrawer()}
+        >
+        <Icon 
+          style={{ fontSize: 30, color: '#CECECE' }}
+          name='ios-menu'
+         />
+      </Button>
+      ),
+    };
+  };
     
-    headerRight: (
-      <Button
-        onPress={() => alert('This is a button!')}
-        title="Info"
-        color="#841584"
-      />
-    ),}
   constructor(props) {
     super(props);
     this.state = {
@@ -34,9 +45,6 @@ class MainPage extends Component {
     };
 
   }
-
-
-  componentDidMount(){ }
 
   onChangeName = (name) => {
     this.setState({searchItemName: name});
@@ -81,7 +89,6 @@ class MainPage extends Component {
   fecthData = async () => {
     const data =  await fetch('https://www.romexchange.com/api/items.json');
     return await data.json();
-
   }
 
   searchFecthData = async () => {
@@ -156,8 +163,6 @@ class MainPage extends Component {
 
       <Container>
       
-      <HearderBar color='#fff' navigation={this.props.navigation} />
-
       <SearchField
         onSearch={this.onSearch}
         onChangeName={this.onChangeName}
@@ -182,9 +187,6 @@ class MainPage extends Component {
             onPress={this.onShowItems} center rounded info>
               <Text>Items from {!loading && `${itemsFrom.begin} - ${itemsFrom.end}`}</Text>
               {loading && <Spinner/>}
-          </Button>
-            <Button onPress={() => this.props.navigation.toggleDrawer()}>
-             <Text>Abra</Text>
           </Button>
         </View>
 
