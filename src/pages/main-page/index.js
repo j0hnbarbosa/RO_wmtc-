@@ -190,7 +190,7 @@ class MainPage extends Component {
           </Button>
         </View>
 
-        {/* {dataArray.length > 0 && <Content padder>
+        {dataArray.length > 0 && <Content padder>
             <Accordion
               dataArray={dataArray}
               icon="add"
@@ -199,7 +199,7 @@ class MainPage extends Component {
               expandedIconStyle={{ color: "red" }}
             />
           </Content>
-        } */}
+        }
         </Container>
  
     );

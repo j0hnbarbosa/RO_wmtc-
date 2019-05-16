@@ -103,7 +103,7 @@ class Category extends Component {
     return (
      <Container>
        {loading && <Spinner /> }
-      {dataItem && 
+      {/* {dataItem && 
       <Content>
         {dataItem.map( (item, index) => 
             <Text key={index}>
@@ -111,19 +111,19 @@ class Category extends Component {
             </Text>
           )}
       </Content>
-        }
+        } */}
 
-       {/* { dataArray && dataArray.length > 0 && (
+       { dataItem && (
           <Content padder>
             <Accordion
-              dataArray={dataArray['Off-hand: card']}
+              dataArray={dataItem}
               icon="add"
               expandedIcon="remove"
               iconStyle={{ color: "green" }}
               expandedIconStyle={{ color: "red" }}
             />
           </Content>)
-        } */}
+        }
      </Container>
     );
   }
