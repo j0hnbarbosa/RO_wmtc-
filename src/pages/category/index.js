@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import {
-  View, 
+
+import { 
+  Container, 
+  Spinner, 
+  Content,   
+  Accordion, 
   Text,
-  Content,
-  Accordion,
-} from 'react-native';
-import { Container } from 'native-base';
+} from 'native-base';
+
 class Category extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
@@ -95,14 +97,23 @@ class Category extends Component {
   }
 
   render() {
-    const {dataArray} = this.state;
-    console.log('render', dataArray['Off-hand: card']);
+    const {dataArray, loading} = this.state;
+    const dataItem = dataArray['Off-hand: card'] ? dataArray['Off-hand: card'] : [];
+    dataItem && console.log('render', dataItem[0]);
     return (
      <Container>
-       <Text>
-         Aqui
-       </Text>
-       { dataArray && dataArray.length > 0 && (
+       {loading && <Spinner /> }
+      {dataItem && 
+      <Content>
+        {dataItem.map( (item, index) => 
+            <Text key={index}>
+              {item.title}
+            </Text>
+          )}
+      </Content>
+        }
+
+       {/* { dataArray && dataArray.length > 0 && (
           <Content padder>
             <Accordion
               dataArray={dataArray['Off-hand: card']}
@@ -112,7 +123,7 @@ class Category extends Component {
               expandedIconStyle={{ color: "red" }}
             />
           </Content>)
-        }
+        } */}
      </Container>
     );
   }
