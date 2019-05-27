@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ShowItem from '../../components/show-item';
 
 import {
   Container,
@@ -11,6 +12,7 @@ import {
   Card,
   CardItem,
   Body,
+  Button,
 } from 'native-base';
 
 class Category extends Component {
@@ -24,6 +26,9 @@ class Category extends Component {
       dataArray: [],
       loading: false,
       selected: '',
+      searchItemName: '',
+      searchData: [],
+      loading: false,
     };
   }
 
@@ -109,6 +114,15 @@ class Category extends Component {
     return await data.json();
   }
 
+  searchFecthData = async (searchItemName) => {
+    this.setState({loading: true});
+    const data =  await fetch(`https://www.romexchange.com/api?item=${searchItemName}&exact=true`);
+    const da = await data.json();
+    // console.log(da);
+    this.setState({searchData: da, loading: false})
+    // alert(da)
+  }
+
   onShowItems = async () => {
     this.setState({ loading: true });
     const datas = await this.fecthData();
@@ -141,28 +155,18 @@ class Category extends Component {
 
   render() {
     // console.log("functTypeDataArray", this.functTypeDataArray())
-    const { dataArray, loading } = this.state;
+    const { dataArray, loading, searchData } = this.state;
     const dataItem = (this.state.selected ? dataArray[this.getTypeData(this.state.selected)] : []);
     dataItem && console.log('render', dataItem[0]);
     return (
       <Container>
-        {loading && <Spinner /> }
-        {/* {dataItem &&
-      <Content>
-        {dataItem.map( (item, index) =>
-            <Text key={index}>
-              {item.title}
-            </Text>
-          )}
-      </Content>
-        } */}
 
           <Content padder>
             <Form >
               <Picker
                 note
                 mode="dropdown"
-                style={{ width: 220 }}
+                style={{display: 'flex', justifyContent: 'center', width: 220 }}
                 selectedValue={this.state.selected}
                 onValueChange={this.onValueChange.bind(this)}
               >
@@ -178,26 +182,33 @@ class Category extends Component {
             </Picker>
           </Form>
         </Content>
-
-        <Card>
-          <CardItem>
-            <Body>
-              <Text>
-             Aqui:
-              </Text>
-            </Body>
-          </CardItem>
-        </Card>
+        {loading && <Spinner /> }
+        <ShowItem searchData={searchData} />
 
         { dataItem && (
        <Content padder>
-         <Accordion
+         {dataItem.map((data, index) =>
+         (
+         <Button
+          onPress={() => this.searchFecthData(data.title)}
+          key={index}
+          full
+          transparent
+         >
+           <Text>
+              {data.title}
+           </Text>
+         </Button>
+         )
+
+         )}
+         {/* <Accordion
               dataArray={dataItem}
               icon="add"
               expandedIcon="remove"
               iconStyle={{ color: 'green' }}
               expandedIconStyle={{ color: 'red' }}
-            />
+            /> */}
        </Content>
        )
         }
